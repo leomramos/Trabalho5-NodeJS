@@ -1,26 +1,15 @@
 {
-  "name": "trabalho5-nodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/leomramos/Trabalho5-NodeJS.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/leomramos/Trabalho5-NodeJS/issues"
-  },
-  "homepage": "https://github.com/leomramos/Trabalho5-NodeJS#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "express": "^4.18.0",
-    "mysql": "^2.18.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.15"
   }
 }
