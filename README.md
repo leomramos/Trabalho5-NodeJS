@@ -1,4 +1,9 @@
-## npm run install
-## npm run start
+# Por favor, configurar os dados de acesso ao banco [aqui](./server/.env)
 
-Por favor, configurar os dados de acesso ao banco no arquivo ./server/.env
+### Para iniciar, execute os comandos abaixo na pasta raíz [trabalho5-nodejs](./)
+
+<br>
+
+> `npm install`
+
+> `npm run start`

@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import axios from 'axios';
 
 const App = () => {
 
   const getResponse = async () => {
     axios.get('/teste')
-      .then(response => console.log(response))
-      .catch(e => console.log(e))
+      .then(response => {
+        console.log(response);
+        alert(response.data.teste);
+      })
+      .catch(e => console.error(e))
   };
 
   useEffect(() => {
