@@ -6,12 +6,12 @@
   "scripts": {
     "installServer": "cd server && npm install",
     "installClient": "cd client && npm install",
-    "install": "concurrently \"npm run installServer\"  \"npm run installClient\"", 
+    "install": "concurrently \"npm run installServer\"  \"npm run installClient\"",
     "server": "cd server && npm run start",
     "serverDev": "cd server && npm run dev",
     "client": "cd client && npm start",
-    "start": "concurrently \"npm run server\"  \"npm run client\"",
-    "dev": "concurrently \"npm run serverDev\"  \"npm run client\""
+    "start": "concurrently --kill-others-on-fail \"npm run server\"  \"npm run client\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run serverDev\"  \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "url": "https://github.com/leomramos/Trabalho5-NodeJS/issues"
   },
   "homepage": "https://github.com/leomramos/Trabalho5-NodeJS#readme",
-  "dependencies": {
+  "devDependencies": {
     "concurrently": "^7.1.0"
   }
 }
