@@ -132,7 +132,7 @@ export const Header = ({modal}) => {
               <Button variant="outline-primary" href="#products" className="mt-3">Check it out</Button>
             </CTA>
           </Row>
-          <a href="#products" className="text-center"><ClickToScroll icon={faChevronDown} className="text-primary"/></a>
+          <a href="#products" className="text-center d-flex m-auto"><ClickToScroll icon={faChevronDown} className="text-primary"/></a>
         </Container>
       </div>
     </StyledHeader>

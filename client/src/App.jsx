@@ -71,10 +71,10 @@ const App = () => {
         {modalContent}
       </Modal>
       <Header modal={modal}/>
-      <Footer />
       <div id="products">
         asdsad
       </div>
+      <Footer />
     </div>
   );
 }

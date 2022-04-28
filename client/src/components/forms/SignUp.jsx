@@ -11,9 +11,6 @@ export const SignUpForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log(name);
-  console.log(email);
-  console.log(password);
 
   const validator = useRef(new SimpleReactValidator());
 
@@ -42,14 +39,14 @@ export const SignUpForm = () => {
         <Form.Control type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="name@example.com" spellCheck="false" autoCorrect="off" autoCapitalize="off"/>
         <Form.Label htmlFor="email">Email address</Form.Label>
         {validator.current.message('email', email, 'required|email')}
-        {validator.current.messageWhenPresent(name)}
+        {validator.current.messageWhenPresent(email)}
       </Form.Floating>
 
       <Form.Floating className="mb-4">
         <Form.Control type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" spellCheck="false" autoCorrect="off" autoCapitalize="off" name="current-password" autoComplete="current-password"/>
         <Form.Label htmlFor="password">Password</Form.Label>
         {validator.current.message('password', password, 'required|min:4|max:16')}
-        {validator.current.messageWhenPresent(name)}
+        {validator.current.messageWhenPresent(password)}
       </Form.Floating>
       
       <Button variant="dark" className="w-100 mb-3 mt-1" onClick={submitForm}>Register</Button>
