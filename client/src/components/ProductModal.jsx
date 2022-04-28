@@ -1,27 +1,22 @@
 import React from 'react';
+import Styled from 'styled-components';
 
 import {
+  Row,
   Col,
   Button,
   Card
 } from 'react-bootstrap';
 
+const StyledImage = Styled.img`
+  max-width: 400px;
+`
+
 export const ProductCreateModal = ({product}) => {
   return (
-    <Col md={4} sm={6} className="p-3" key={product.index}>
-      <Card>
-        <img src="header-background.jpg" className="card-img-top" alt={product.title + " image"}/>
-        <Card.Body>
-          <Card.Title>{product.title}</Card.Title>
-          <Card.Text>{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' })}</Card.Text>
-          <Button variant="primary">See more</Button>
-        </Card.Body>
-        <Card.Body className="border-top">
-          <a href="/" className="card-link">Card link</a>
-          <a href="/" className="card-link">Another link</a>
-        </Card.Body>
-      </Card>
-    </Col>
+    <p>
+      aaaaaaa
+    </p>
   )
 }
 
@@ -35,8 +30,13 @@ export const ProductEditModal = ({product}) => {
 
 export const ProductSeeModal = ({product}) => {
   return (
-    <p>
-      {JSON.stringify(product)}
-    </p>
+    <Row className="m-0">
+      <Col md={6}>
+        <StyledImage src="http://localhost:3001/storage/images/header-background.jpg" className="img-thumbnail" alt={product.title + " image"}/>
+      </Col>
+      <p>
+        {JSON.stringify(product)}
+      </p>
+    </Row>
   )
 }

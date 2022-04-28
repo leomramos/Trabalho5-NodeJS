@@ -3,23 +3,58 @@ import Swal from 'sweetalert2'
 
 import {
   Container,
-  Row
+  Row,
+  Col,
+  Button
 } from 'react-bootstrap';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { ProductCard, ProductCreateModal, ProductEditModal, ProductSeeModal } from '../';
 
 export const Products = ({modal}) => {
   const [products, setProducts] = useState([
     {
-      index: 0,
+      id: 0,
       title: 'Teste 1',
       description: 'Descrição 1',
       price: 100000
-    }
+    },
+    {
+      id: 1,
+      title: 'Teste 2',
+      description: 'Descrição 2',
+      price: 200000
+    },
+    {
+      id: 2,
+      title: 'Teste 3',
+      description: 'Descrição 3',
+      price: 300000
+    },
+    {
+      id: 3,
+      title: 'Teste 4',
+      description: 'Descrição 4',
+      price: 400000
+    },
+    {
+      id: 4,
+      title: 'Teste 5',
+      description: 'Descrição 5',
+      price: 500000
+    },
+    {
+      id: 5,
+      title: 'Teste 6',
+      description: 'Descrição 6',
+      price: 600000
+    },
   ]);
 
   const actions = {
-    createModal: product => {
+    createModal: _ => {
       modal.setLabel("Create product");
       modal.setContent(<ProductCreateModal />)
       modal.open();
@@ -46,12 +81,12 @@ export const Products = ({modal}) => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
+          setProducts(products.filter(p => p.id !== product.id))
           Swal.fire({
             backdrop: false,
             title: 'Deleted',
             text: `${product.title} has been deleted!`,
             icon: 'success',
-            // confirmButtonColor: '#28a745',
             confirmButtonColor: '#17a2b8'
           })
         }
@@ -62,15 +97,20 @@ export const Products = ({modal}) => {
   return (
     <Container id="products" className="py-5">
       <Row className="mb-5">
-        <h1>
-          Products
-        </h1>
-        <span>
-          { products.length > 0 ?
-            "Your next instrument is here waiting for you" :
-            "We are sorry, but we are out of stock"
-          }
-        </span>
+        <Col md={6}>
+          <h1>
+            Products
+          </h1>
+          <span>
+            { products.length > 0 ?
+              "Your next instrument is here waiting for you" :
+              "We are sorry, but we are out of stock"
+            }
+          </span>
+        </Col>
+        <Col md={6} className="d-flex align-items-center justify-content-end">
+          <Button variant="primary" className="fw-bold" onClick={actions.createModal}>Add Product <FontAwesomeIcon icon={faPlusCircle} /></Button>
+        </Col>
       </Row>
       <Row>
         {

@@ -48,7 +48,7 @@ const App = () => {
   }
 
   const getResponse = async () => {
-    axios.get('/api/instruments/123213')
+    axios.get('http://localhost:3001/api/instruments/123213')
       .then(response => {
         console.log(response);
         // alert(response.data.uID);
