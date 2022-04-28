@@ -10,7 +10,7 @@ router
 router
   .route('/login')
   .post((req, res) => {
-
+    res.send("teste");
   })
 
 module.exports = router;

@@ -5,13 +5,13 @@ const app = express();
 const cors = require('cors');
 
 const userRoutes = require('./routes/users');
-const destinationsRoutes = require('./routes/destinations');
+const instrumentsRoutes = require('./routes/instruments');
 
 
 app.use(cors());
 
-app.use('/users', userRoutes);
-app.use('/destinations', destinationsRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/instruments', instrumentsRoutes);
 
 app.get('/teste', (req, res) => {
   res.send({ teste: 'teste' });

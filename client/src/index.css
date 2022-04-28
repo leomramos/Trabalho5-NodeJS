@@ -1,16 +1,115 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+html {
+  scroll-behavior: smooth;
+}
+
+html, body, #root, .App {
   width: 100%;
   height: 100%;
-  background: blue;
+  background-color: #b8b8b8;
 }
+
+.black-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.lock-scroll {
+  overflow: hidden;
+}
+
+.ReactModal__Overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ReactModal__Overlay .ReactModal__Content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 !important;
+  position: unset !important;
+  inset: unset !important;
+  max-height: calc(100% - 80px);
+  min-width: 300px;
+}
+
+.ReactModal__Overlay .ReactModal__Content > * {
+  padding: 20px;
+}
+
+.ReactModal__Overlay .ReactModal__Content > *:not(:last-child) {
+  border-bottom: 2px solid #ccc;
+}
+
+.srv-validation-message {
+  font-size: 0.8em;
+  max-width: 250px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4E4E4E #DFE9EB;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: #4E4E4E;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #383838;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #2D2D2D;
+}
+/*# sourceMappingURL=index.css.map */

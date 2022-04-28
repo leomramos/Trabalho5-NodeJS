@@ -4,7 +4,7 @@ let router = express.Router();
 router
   .route('/:id')
   .get((req, res) => {
-
+    res.send({ uID: req.params.id });
   })
 
 router

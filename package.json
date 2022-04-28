@@ -25,5 +25,9 @@
   "homepage": "https://github.com/leomramos/Trabalho5-NodeJS#readme",
   "devDependencies": {
     "concurrently": "^7.1.0"
+  },
+  "dependencies": {
+    "react-modal": "^3.15.1",
+    "simple-react-validator": "^1.6.1"
   }
 }
