@@ -1,4 +1,5 @@
 {
+  "name": "the-sound-of-your-song",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
