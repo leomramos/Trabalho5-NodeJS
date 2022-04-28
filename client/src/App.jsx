@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Header, Footer } from './components/layout';
+import { Header, Products, Footer } from './components/layout';
 import Modal from 'react-modal';
 import Styled from 'styled-components';
 
@@ -71,9 +71,7 @@ const App = () => {
         {modalContent}
       </Modal>
       <Header modal={modal}/>
-      <div id="products">
-        asdsad
-      </div>
+      <Products modal={modal}/>
       <Footer />
     </div>
   );

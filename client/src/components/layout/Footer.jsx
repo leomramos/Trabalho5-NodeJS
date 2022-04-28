@@ -1,5 +1,4 @@
 import React from 'react';
-import Styled from 'styled-components';
 
 import {
   Container,
@@ -7,16 +6,12 @@ import {
   Col
 } from 'react-bootstrap';
 
-const StyledFooter = Styled(Container)`
-  /* background-color: #212529; */
-`
-
 export const Footer = () => {
   return (
-    <StyledFooter fluid className="bg-dark text-light p-5">
+    <Container fluid className="bg-dark text-light py-5">
       <Container>
         <Row>
-          <Col className="md-6">
+          <Col md={6}>
             <p className="m-0">
               Trabalho 5 - NodeJS (Express + React.JS)
             </p>
@@ -27,12 +22,12 @@ export const Footer = () => {
               &copy; Copyright 2022. All rights reserved.
             </p>
           </Col>
-          <Col className="md-6 text-end">
+          <Col md={6} className="text-end">
             <a href="/" className="text-light text-decoration-none m-2">Home</a>
             <a href="#products" className="text-light text-decoration-none">Products</a>
           </Col>
         </Row>
       </Container>
-    </StyledFooter>
+    </Container>
   )
 }

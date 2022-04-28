@@ -34,9 +34,10 @@ const Nav = Styled.nav`
 
   #nav-brand {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     svg {
-      font-size: 3em;
+      font-size: 2em;
+      margin-right: 10px;
     }
     #brand-name {
       font-size: 1.5em;
