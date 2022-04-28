@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2'
 
 import {
   Container,
@@ -32,6 +33,29 @@ export const Products = ({modal}) => {
       modal.setLabel(product.title);
       modal.setContent(<ProductSeeModal product={product} />)
       modal.open();
+    },
+    delete: product => {
+      Swal.fire({
+        backdrop: false,
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#007bff',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            backdrop: false,
+            title: 'Deleted',
+            text: `${product.title} has been deleted!`,
+            icon: 'success',
+            // confirmButtonColor: '#28a745',
+            confirmButtonColor: '#17a2b8'
+          })
+        }
+      })    
     }
   }
 

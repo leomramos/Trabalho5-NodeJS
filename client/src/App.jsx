@@ -61,11 +61,12 @@ const App = () => {
   }, [])
 
   return (
-    <div className={`App ${isModalOpen ? 'lock-scroll' : ''}`}>
+    <div className="App">
       <Modal
         isOpen={isModalOpen}
         contentLabel={modalLabel}
         onRequestClose={modal.close}
+        preventScroll={true}
       >
         <ModalHeader title={modalLabel} close={modal.close}/>
         {modalContent}

@@ -16,9 +16,9 @@ export const ProductCard = ({product, actions}) => {
           <Card.Text>{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' })}</Card.Text>
           <Button variant="primary" onClick={() => actions.seeModal(product)}>See more</Button>
         </Card.Body>
-        <Card.Body className="border-top">
-          <a href="/" className="card-link">Card link</a>
-          <a href="/" className="card-link">Another link</a>
+        <Card.Body className="border-top d-flex gap-2">
+          <Button variant="dark" onClick={() => actions.editModal(product)}>Edit</Button>
+          <Button variant="danger" onClick={() => actions.delete(product)}>Delete</Button>
         </Card.Body>
       </Card>
     </Col>

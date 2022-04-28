@@ -31,7 +31,7 @@ html, body, #root, .App {
           flex-direction: column;
 }
 
-.lock-scroll {
+.ReactModal__Body--open {
   overflow: hidden;
 }
 

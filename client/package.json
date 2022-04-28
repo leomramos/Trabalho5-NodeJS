@@ -17,6 +17,7 @@
     "react-scripts": "5.0.1",
     "simple-react-validator": "^1.6.1",
     "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
