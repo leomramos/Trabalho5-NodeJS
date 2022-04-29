@@ -95,16 +95,16 @@ const StyledHeader = Styled(Container)`
   align-items: center;
 `;
 
-export const Header = ({modal}) => {
+export const Header = ({modal, setUser}) => {
   const handleSignUpModal = () => {
     modal.setLabel('Sign Up');
-    modal.setContent(<SignUpForm />);
+    modal.setContent(<SignUpForm setUser={setUser}/>);
     modal.open();
   }
 
   const handleLoginModal = () => {
     modal.setLabel('Login');
-    modal.setContent(<LoginForm />);
+    modal.setContent(<LoginForm setUser={setUser}/>);
     modal.open();
   }
 

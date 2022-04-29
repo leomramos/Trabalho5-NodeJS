@@ -5,7 +5,7 @@ import {
   Button
 } from 'react-bootstrap';
 
-export const LoginForm = () => {
+export const LoginForm = ({setUser}) => {
   const [rerender, setRerender] = useState(false);
 
   const [email, setEmail] = useState('');

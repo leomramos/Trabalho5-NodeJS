@@ -39,6 +39,10 @@ const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalLabel, setModalLabel] = useState("");
   const [modalContent, setModalContent] = useState(<></>);
+  
+  const [user, setUser] = useState();
+
+  console.log(user);
 
   const modal = {
     open: () => setModalOpen(true),
@@ -71,7 +75,7 @@ const App = () => {
         <ModalHeader title={modalLabel} close={modal.close}/>
         {modalContent}
       </Modal>
-      <Header modal={modal}/>
+      <Header modal={modal} setUser={setUser}/>
       <Products modal={modal}/>
       <Footer />
     </div>

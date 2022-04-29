@@ -5,7 +5,7 @@ import {
   Button
 } from 'react-bootstrap';
 
-export const SignUpForm = () => {
+export const SignUpForm = ({setUser}) => {
   const [rerender, setRerender] = useState(false);
 
   const [name, setName] = useState('');
