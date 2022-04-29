@@ -2,6 +2,11 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import {
+  CreateProduct,
+  EditProduct
+} from './forms';
+
+import {
   Row
 } from 'react-bootstrap';
 
@@ -13,19 +18,15 @@ const ProductInfo = Styled.div`
   max-width: 800px;
 `
 
-export const ProductCreateModal = ({product}) => {
+export const ProductCreateModal = () => {
   return (
-    <p>
-      aaaaaaa
-    </p>
+    <CreateProduct />
   )
 }
 
 export const ProductEditModal = ({product}) => {
   return (
-    <p>
-      {JSON.stringify(product)}
-    </p>
+    <EditProduct product={product}/>
   )
 }
 
