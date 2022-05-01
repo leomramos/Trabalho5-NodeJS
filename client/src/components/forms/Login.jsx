@@ -23,7 +23,7 @@ const loginUser = async user => {
       backdrop: false,
       timer: 2500,
       timerProgressBar: true,
-      title: err.response.data.email || err.response.data.password,
+      title: err.response.data && err.response.data.error,
       icon: 'error',
       confirmButtonColor: '#17a2b8'
     });
@@ -62,6 +62,7 @@ export const LoginForm = ({setUser, closeModal}) => {
   const submitForm = () => {
     if (validator.current.allValid()) {
       validator.current.hideMessages();
+      username = null;
       loginUserMutation.mutate({email, password});
     } else {
       validator.current.showMessages();

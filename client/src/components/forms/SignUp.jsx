@@ -22,7 +22,7 @@ const registerUser = async user => await Axios.post(`${process.env.REACT_APP_SER
     backdrop: false,
     timer: 2500,
     timerProgressBar: true,
-    title: err.response.data.email || err.response.data.password,
+    title: err.response.data.error,
     icon: 'error',
     confirmButtonColor: '#17a2b8'
   });
@@ -61,7 +61,7 @@ export const SignUpForm = ({setUser, closeModal}) => {
   const submitForm = () => {
     if (validator.current.allValid()) {
       validator.current.hideMessages();
-      alert('You submitted the form and stuff!');
+      username = null;
       registerUserMutation.mutate({name, email, password});
     } else {
       validator.current.showMessages();

@@ -21,7 +21,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { ProductCard, ProductCreateModal, ProductEditModal, ProductSeeModal } from '../';
 
 const getProducts = async () => await Axios.get(`${process.env.REACT_APP_SERVER}/api/products/all`).then(res => res.data).catch(e => console.error(e));
-const deleteProduct = async ({ id }) => await Axios.delete(`${process.env.REACT_APP_SERVER}/api/products/delete`, { data: { id }});
+const deleteProduct = async product => await Axios.delete(`${process.env.REACT_APP_SERVER}/api/products/delete`, { data: { product }});
 
 export const Products = ({modal, loggedIn}) => {
   const queryClient = useQueryClient();
@@ -41,16 +41,16 @@ export const Products = ({modal, loggedIn}) => {
       });
     }
   })
-  
+
   const actions = {
     createModal: _ => {
       modal.setLabel("Create product");
-      modal.setContent(<ProductCreateModal />)
+      modal.setContent(<ProductCreateModal closeModal={modal.close}/>)
       modal.open();
     },
     editModal: product => {
       modal.setLabel("Edit product");
-      modal.setContent(<ProductEditModal product={product} />)
+      modal.setContent(<ProductEditModal product={product} closeModal={modal.close}/>)
       modal.open();
     },
     seeModal: product => {

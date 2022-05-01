@@ -18,15 +18,15 @@ const ProductInfo = Styled.div`
   max-width: 800px;
 `
 
-export const ProductCreateModal = () => {
+export const ProductCreateModal = ({closeModal}) => {
   return (
-    <CreateProduct />
+    <CreateProduct closeModal={closeModal}/>
   )
 }
 
-export const ProductEditModal = ({product}) => {
+export const ProductEditModal = ({product, closeModal}) => {
   return (
-    <EditProduct product={product}/>
+    <EditProduct product={product} closeModal={closeModal}/>
   )
 }
 

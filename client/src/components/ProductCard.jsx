@@ -10,7 +10,7 @@ export const ProductCard = ({product, actions, loggedIn}) => {
   return (
     <Col md={4} sm={6} className="p-3">
       <Card>
-        <img src={product.image} className="card-img-top" alt={product.title + " image"}/>
+        <img src={`${process.env.REACT_APP_SERVER}/storage/images/${product.image}`} className="card-img-top" alt={product.title + " image"}/>
         <Card.Body>
           <Card.Title>{product.title}</Card.Title>
           <Card.Text>{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' })}</Card.Text>
