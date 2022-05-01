@@ -20,8 +20,21 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { ProductCard, ProductCreateModal, ProductEditModal, ProductSeeModal } from '../';
 
+let deleted;
+
 const getProducts = async () => await Axios.get(`${process.env.REACT_APP_SERVER}/api/products/all`).then(res => res.data).catch(e => console.error(e));
-const deleteProduct = async product => await Axios.delete(`${process.env.REACT_APP_SERVER}/api/products/delete`, { data: { product }});
+const deleteProduct = async product => await Axios.delete(`${process.env.REACT_APP_SERVER}/api/products/delete`, { data: { product }}).then(res => {
+  deleted = true;
+}).catch(err => {
+  Swal.fire({
+    backdrop: false,
+    timer: 2500,
+    timerProgressBar: true,
+    title: err.response.data.error,
+    icon: 'error',
+    confirmButtonColor: '#17a2b8'
+  });
+});
 
 export const Products = ({modal, loggedIn}) => {
   const queryClient = useQueryClient();
@@ -29,16 +42,19 @@ export const Products = ({modal, loggedIn}) => {
   const products = useQuery('products', getProducts);
   const deleteProductMutation = useMutation(deleteProduct, {
     onSuccess: (_, product) => {
-      queryClient.invalidateQueries('products');
-      Swal.fire({
-        backdrop: false,
-        timer: 2500,
-        timerProgressBar: true,
-        title: 'Deleted',
-        html: `<strong>${product.title}</strong> has been deleted!`,
-        icon: 'success',
-        confirmButtonColor: '#17a2b8'
-      });
+      if(deleted) {
+        products.remove();
+        queryClient.invalidateQueries('products');
+        Swal.fire({
+          backdrop: false,
+          timer: 2500,
+          timerProgressBar: true,
+          title: 'Deleted',
+          html: `<strong>${product.title}</strong> has been deleted!`,
+          icon: 'success',
+          confirmButtonColor: '#17a2b8'
+        });
+      }
     }
   })
 
@@ -70,6 +86,7 @@ export const Products = ({modal, loggedIn}) => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
+          deleted = false;
           deleteProductMutation.mutate(product);
         }
       })    
