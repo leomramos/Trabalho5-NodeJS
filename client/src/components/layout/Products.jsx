@@ -20,42 +20,42 @@ export const Products = ({modal}) => {
       title: 'Teste 1',
       description: 'Descrição 1',
       price: 100000,
-      img: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
+      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
     },
     {
       id: 1,
       title: 'Teste 2',
       description: 'Descrição 2',
       price: 200000,
-      img: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
+      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
     },
     {
       id: 2,
       title: 'Teste 3',
       description: 'Descrição 3',
       price: 300000,
-      img: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
+      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
     },
     {
       id: 3,
       title: 'Teste 4',
       description: 'Descrição 4',
       price: 400000,
-      img: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
+      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
     },
     {
       id: 4,
       title: 'Teste 5',
       description: 'Descrição 5',
       price: 500000,
-      img: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
+      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
     },
     {
       id: 5,
       title: 'Teste 6',
       description: 'Descrição 6',
       price: 600000,
-      img: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
+      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
     },
   ]);
 
@@ -90,6 +90,8 @@ export const Products = ({modal}) => {
           setProducts(products.filter(p => p.id !== product.id))
           Swal.fire({
             backdrop: false,
+            timer: 2500,
+            timerProgressBar: true,
             title: 'Deleted',
             text: `${product.title} has been deleted!`,
             icon: 'success',
@@ -115,7 +117,7 @@ export const Products = ({modal}) => {
           </span>
         </Col>
         <Col md={6} className="d-flex align-items-center justify-content-end">
-          <Button variant="primary" className="fw-bold" onClick={actions.createModal}>Add Product <FontAwesomeIcon icon={faPlusCircle} /></Button>
+          <Button variant="primary" className="fw-bold d-flex align-items-center gap-2" onClick={actions.createModal}>Add new<FontAwesomeIcon icon={faPlusCircle}/></Button>
         </Col>
       </Row>
       <Row>

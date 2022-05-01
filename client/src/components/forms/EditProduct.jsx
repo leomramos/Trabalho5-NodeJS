@@ -29,7 +29,7 @@ export const EditProduct = ({product}) => {
 
   return (
     <Form className="d-flex flex-column">
-      <h5 className="fw-normal mb-3 pb-3">Add a new instrument</h5>
+      <h5 className="fw-normal mb-3 pb-3">Edit {product.title}</h5>
 
       <Form.Floating className="mb-4">
         <Form.Control type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} placeholder="Title"/>
@@ -55,10 +55,10 @@ export const EditProduct = ({product}) => {
 
       <Form.Group className="mb-4">
         <Form.Control type="file" id="image" accept="image/*" onChange={e => setImage(e.target.files[0])} placeholder="Image"/>
-        <img className="img-thumbnail mt-3" style={{maxWidth: "320px"}} src={image ? URL.createObjectURL(image) : product.img} alt="Upload"/>
+        <img className="img-thumbnail mt-3" style={{maxWidth: "320px"}} src={image ? URL.createObjectURL(image) : product.image} alt="Upload"/>
       </Form.Group>
       
-      <Button variant="dark" className="w-100 mb-3 mt-1" onClick={submitForm}>Create</Button>
+      <Button variant="dark" className="w-100 mb-3 mt-1" onClick={submitForm}>Update</Button>
     </Form>
   )
 }

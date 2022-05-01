@@ -39,9 +39,6 @@ export const ProductSeeModal = ({product}) => {
         <span className="fw-bold">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' })}</span>
         <p className="mt-3">{product.description}</p>
       </ProductInfo>
-      {/* <p>
-        {JSON.stringify(product)}
-      </p> */}
     </Row>
   )
 }
