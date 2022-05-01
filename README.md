@@ -6,4 +6,6 @@
 
 > `npm install`
 
+> `npm run database`
+
 > `npm start`

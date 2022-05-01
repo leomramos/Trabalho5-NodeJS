@@ -8,21 +8,10 @@ const app = express();
 const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const session = require('express-session');
-const cookieParser = require("cookie-parser");
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  cookie: { maxAge: 1000 * 60 * 30 },
-  saveUninitialized: true
-}));
 
 app.use(fileUpload({
   createParentPath: true
 }));
-
-app.use(cookieParser());
 
 const userRoutes = require('./routes/users');
 const productsRoutes = require('./routes/products');

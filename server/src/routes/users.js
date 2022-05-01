@@ -12,7 +12,6 @@ router
       if (!result) {
         bcrypt.hash(user.password, saltRounds, (err, hash) => {
           user.password = hash;
-          req.session.loggedUser = user.name;
           Controller.store(user, res).then(result => res.send(result));
           return;
         })
@@ -37,28 +36,11 @@ router
             res.status(400).send({ error: 'Incorrect password.' });
             return;
           }
-          req.session.loggedUser = result.dataValues.name;
-          console.log(req.session);
           res.send(result.dataValues);
           return;
         })
       }
     });
-  })
-
-router
-  .route('/check')
-  .post((req, res) => {
-    console.log(req.session)
-    console.log(!req.session.loggedUser)
-  })
-
-router
-  .route('/logout')
-  .post((req, res) => {
-    req.session.destroy();
-    console.log(req.session);
-    res.status(200).send('Logged out.');
   })
 
 module.exports = router;

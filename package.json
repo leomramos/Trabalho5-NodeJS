@@ -9,6 +9,7 @@
     "install": "concurrently \"npm run installServer\"  \"npm run installClient\"",
     "server": "cd server && npm run start",
     "serverDev": "cd server && npm run dev",
+    "database": "cd server && npm run configDB",
     "client": "cd client && npm start",
     "start": "concurrently --kill-others-on-fail \"npm run server\"  \"npm run client\"",
     "dev": "concurrently --kill-others-on-fail \"npm run serverDev\"  \"npm run client\""

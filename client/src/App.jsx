@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import React, { useState } from 'react';
 import { Header, Products, Footer } from './components/layout';
 import Modal from 'react-modal';
 import Styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-
-import {
-  useQuery
-} from 'react-query';
 
 Modal.setAppElement('#root');
 
@@ -39,22 +34,12 @@ const ModalHeader = ({title, close}) => {
   )
 }
 
-const checkLogin = async _ => await Axios.post(`${process.env.REACT_APP_SERVER}/api/users/check`);
-
 const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalLabel, setModalLabel] = useState("");
   const [modalContent, setModalContent] = useState(<></>);
   
   const [user, setUser] = useState();
-
-  const login = useQuery('user', checkLogin);
-
-  console.log(login);
-
-  // useEffect(() => {
-  //   setUser(login);
-  // }, [login])
 
   const modal = {
     open: () => setModalOpen(true),
