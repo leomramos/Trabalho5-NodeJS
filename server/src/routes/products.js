@@ -1,16 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const Controller = require('../controllers/ProductController');
 
 router
-  .route('/:id')
+  .route('/all')
   .get((req, res) => {
-    res.send({ uID: req.params.id });
-  })
-
-router
-  .route('/list')
-  .get((req, res) => {
-
+    Controller.index().then(result => res.json(result));
   })
 
 router
@@ -28,8 +23,8 @@ router
 router
   .route('/delete')
   .delete((req, res) => {
-
+    Controller.destroy(req.body.id).then(res.send('Product deleted.'));
   })
 
-
 module.exports = router;
+// .catch(err => res.status(400).send(err))

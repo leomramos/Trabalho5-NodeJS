@@ -11,7 +11,8 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       description: {
         type: Sequelize.STRING,
@@ -25,7 +26,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      create_at: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false
       },

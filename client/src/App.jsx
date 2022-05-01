@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { Header, Products, Footer } from './components/layout';
 import Modal from 'react-modal';
 import Styled from 'styled-components';
@@ -50,19 +49,6 @@ const App = () => {
     setLabel: label => setModalLabel(label),
     setContent: content => setModalContent(content)
   }
-
-  const getResponse = async () => {
-    axios.get('http://localhost:3001/api/instruments/123213')
-      .then(response => {
-        console.log(response);
-        // alert(response.data.uID);
-      })
-      .catch(e => console.error(e))
-  };
-
-  useEffect(() => {
-    getResponse();
-  }, [])
 
   return (
     <div className="App">

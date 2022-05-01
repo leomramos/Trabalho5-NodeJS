@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Swal from 'sweetalert2'
+import axios from 'axios';
+
+import {
+  useQuery,
+  useMutation,
+  useQueryClient
+} from 'react-query';
 
 import {
   Container,
@@ -13,52 +20,29 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { ProductCard, ProductCreateModal, ProductEditModal, ProductSeeModal } from '../';
 
-export const Products = ({modal}) => {
-  const [products, setProducts] = useState([
-    {
-      id: 0,
-      title: 'Teste 1',
-      description: 'Descrição 1',
-      price: 100000,
-      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
-    },
-    {
-      id: 1,
-      title: 'Teste 2',
-      description: 'Descrição 2',
-      price: 200000,
-      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
-    },
-    {
-      id: 2,
-      title: 'Teste 3',
-      description: 'Descrição 3',
-      price: 300000,
-      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
-    },
-    {
-      id: 3,
-      title: 'Teste 4',
-      description: 'Descrição 4',
-      price: 400000,
-      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
-    },
-    {
-      id: 4,
-      title: 'Teste 5',
-      description: 'Descrição 5',
-      price: 500000,
-      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
-    },
-    {
-      id: 5,
-      title: 'Teste 6',
-      description: 'Descrição 6',
-      price: 600000,
-      image: `${process.env.REACT_APP_SERVER}/storage/images/header-background.jpg`
-    },
-  ]);
 
+const getProducts = async () => await axios.get(`${process.env.REACT_APP_SERVER}/api/products/all`).then(res => res.data).catch(e => console.error(e));
+const deleteProduct = async ({ id }) => await axios.delete(`${process.env.REACT_APP_SERVER}/api/products/delete`, { data: { id }}).then(res => res);
+
+export const Products = ({modal}) => {
+  const queryClient = useQueryClient();
+
+  const products = useQuery('products', getProducts);
+  const deleteProductMutation = useMutation(deleteProduct, {
+    onSuccess: (_, product) => {
+      queryClient.invalidateQueries('products');
+      Swal.fire({
+        backdrop: false,
+        timer: 2500,
+        timerProgressBar: true,
+        title: 'Deleted',
+        html: `<strong>${product.title}</strong> has been deleted!`,
+        icon: 'success',
+        confirmButtonColor: '#17a2b8'
+      });
+    }
+  })
+  
   const actions = {
     createModal: _ => {
       modal.setLabel("Create product");
@@ -87,16 +71,7 @@ export const Products = ({modal}) => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          setProducts(products.filter(p => p.id !== product.id))
-          Swal.fire({
-            backdrop: false,
-            timer: 2500,
-            timerProgressBar: true,
-            title: 'Deleted',
-            text: `${product.title} has been deleted!`,
-            icon: 'success',
-            confirmButtonColor: '#17a2b8'
-          })
+          deleteProductMutation.mutate(product);
         }
       })    
     }
@@ -122,7 +97,7 @@ export const Products = ({modal}) => {
       </Row>
       <Row>
         {
-          products.map((product, index) => <ProductCard key={index} product={product} actions={actions} />)
+          products.isSuccess && products.data.map((product, index) => <ProductCard key={index} product={product} actions={actions} />)
         }
       </Row>
     </Container>

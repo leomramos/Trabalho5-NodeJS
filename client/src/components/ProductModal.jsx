@@ -33,7 +33,7 @@ export const ProductEditModal = ({product}) => {
 export const ProductSeeModal = ({product}) => {
   return (
     <Row className="m-0 gap-4 flex-column">
-      <StyledImage src="http://localhost:3001/storage/images/header-background.jpg" className="img-thumbnail" alt={product.title + " image"}/>
+      <StyledImage src={`${process.env.REACT_APP_SERVER}/storage/images/${product.image}`} className="img-thumbnail" alt={product.title + " image"}/>
       <ProductInfo>
         <h2 className="mb-1">{product.title}</h2>
         <span className="fw-bold">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' })}</span>
