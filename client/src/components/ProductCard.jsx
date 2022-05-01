@@ -6,7 +6,7 @@ import {
   Card
 } from 'react-bootstrap';
 
-export const ProductCard = ({product, actions}) => {
+export const ProductCard = ({product, actions, loggedIn}) => {
   return (
     <Col md={4} sm={6} className="p-3">
       <Card>
@@ -16,10 +16,12 @@ export const ProductCard = ({product, actions}) => {
           <Card.Text>{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' })}</Card.Text>
           <Button variant="primary" onClick={() => actions.seeModal(product)}>See more</Button>
         </Card.Body>
-        <Card.Body className="border-top d-flex gap-2">
-          <Button variant="dark" onClick={() => actions.editModal(product)}>Edit</Button>
-          <Button variant="danger" onClick={() => actions.delete(product)}>Delete</Button>
-        </Card.Body>
+        {loggedIn && (
+          <Card.Body className="border-top d-flex gap-2">
+            <Button variant="dark" onClick={() => actions.editModal(product)}>Edit</Button>
+            <Button variant="danger" onClick={() => actions.delete(product)}>Delete</Button>
+          </Card.Body>
+        )}
       </Card>
     </Col>
   )

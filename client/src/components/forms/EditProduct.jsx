@@ -34,22 +34,19 @@ export const EditProduct = ({product}) => {
       <Form.Floating className="mb-4">
         <Form.Control type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} placeholder="Title"/>
         <Form.Label htmlFor="title">Title</Form.Label>
-        {validator.current.message('title', title, 'required|max:50')}
-        {validator.current.messageWhenPresent(title)}
+        {validator.current.message('title', title, 'required|max:50') || validator.current.messageWhenPresent(title)}
       </Form.Floating>
       
       <Form.Floating className="mb-4">
         <Form.Control type="number" id="price" step={0.1} min={0} max={1000000000} value={price} onChange={e => setPrice(e.target.value)} placeholder="Price"/>
         <Form.Label htmlFor="price">Price</Form.Label>
-        {validator.current.message('price', price, 'required|currency')}
-        {validator.current.messageWhenPresent(price)}
+        {validator.current.message('price', price, 'required|currency') || validator.current.messageWhenPresent(price)}
       </Form.Floating>
 
       <Form.Floating className="mb-4">
         <Form.Control as="textarea" maxLength={255} id="description" style={{resize: "vertical", minHeight: "100px", maxHeight: "200px"}} value={description} onChange={e => setDescription(e.target.value)} placeholder="Description"/>
         <Form.Label htmlFor="description">Description</Form.Label>
-        {validator.current.message('description', description, 'required|min:10|max:255')}
-        {validator.current.messageWhenPresent(description)}
+        {validator.current.message('description', description, 'required|min:10|max:255') || validator.current.messageWhenPresent(description)}
       </Form.Floating>
 
 

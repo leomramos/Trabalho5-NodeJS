@@ -1,6 +1,6 @@
 import React from 'react';
 import Swal from 'sweetalert2'
-import axios from 'axios';
+import Axios from 'axios';
 
 import {
   useQuery,
@@ -20,11 +20,10 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 import { ProductCard, ProductCreateModal, ProductEditModal, ProductSeeModal } from '../';
 
+const getProducts = async () => await Axios.get(`${process.env.REACT_APP_SERVER}/api/products/all`).then(res => res.data).catch(e => console.error(e));
+const deleteProduct = async ({ id }) => await Axios.delete(`${process.env.REACT_APP_SERVER}/api/products/delete`, { data: { id }});
 
-const getProducts = async () => await axios.get(`${process.env.REACT_APP_SERVER}/api/products/all`).then(res => res.data).catch(e => console.error(e));
-const deleteProduct = async ({ id }) => await axios.delete(`${process.env.REACT_APP_SERVER}/api/products/delete`, { data: { id }}).then(res => res);
-
-export const Products = ({modal}) => {
+export const Products = ({modal, loggedIn}) => {
   const queryClient = useQueryClient();
 
   const products = useQuery('products', getProducts);
@@ -85,19 +84,21 @@ export const Products = ({modal}) => {
             Products
           </h1>
           <span>
-            { products.length > 0 ?
+            { products.isSuccess && products.data && products.data.length > 0 ?
               "Your next instrument is here waiting for you" :
               "We are sorry, but we are out of stock"
             }
           </span>
         </Col>
-        <Col md={6} className="d-flex align-items-center justify-content-end">
-          <Button variant="primary" className="fw-bold d-flex align-items-center gap-2" onClick={actions.createModal}>Add new<FontAwesomeIcon icon={faPlusCircle}/></Button>
-        </Col>
+        {loggedIn && (
+          <Col md={6} className="d-flex align-items-center justify-content-end">
+            <Button variant="primary" className="fw-bold d-flex align-items-center gap-2" onClick={actions.createModal}>Add new<FontAwesomeIcon icon={faPlusCircle}/></Button>
+          </Col>
+        )}
       </Row>
       <Row>
         {
-          products.isSuccess && products.data.map((product, index) => <ProductCard key={index} product={product} actions={actions} />)
+          products.isSuccess && products.data && products.data.map((product, index) => <ProductCard key={index} product={product} actions={actions} loggedIn={loggedIn} />)
         }
       </Row>
     </Container>

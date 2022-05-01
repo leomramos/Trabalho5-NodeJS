@@ -61,8 +61,8 @@ const App = () => {
         <ModalHeader title={modalLabel} close={modal.close}/>
         {modalContent}
       </Modal>
-      <Header modal={modal} setUser={setUser}/>
-      <Products modal={modal}/>
+      <Header modal={modal} user={user} setUser={setUser}/>
+      <Products modal={modal} loggedIn={!!user}/>
       <Footer />
     </div>
   );

@@ -11,7 +11,8 @@ router
 router
   .route('/create')
   .post((req, res) => {
-
+    console.log(req);
+    // Controller.store(req.body)
   })
 
 router

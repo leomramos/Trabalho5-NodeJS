@@ -4,13 +4,43 @@ import {
   Form,
   Button
 } from 'react-bootstrap';
+import Swal from 'sweetalert2'
 
-export const SignUpForm = ({setUser}) => {
+import Axios from 'axios';
+
+import {
+  useMutation,
+  useQueryClient
+} from 'react-query';
+
+const registerUser = async user => await Axios.post(`${process.env.REACT_APP_SERVER}/api/users/register`, { user });
+
+export const SignUpForm = ({setUser, closeModal}) => {
   const [rerender, setRerender] = useState(false);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const queryClient = useQueryClient();
+
+  const registerUserMutation = useMutation(registerUser, {
+    onSuccess: (_, user) => {
+      queryClient.invalidateQueries('user');
+      const username = user.name.split(' ')[0];
+      setUser(username);
+      closeModal();
+      Swal.fire({
+        backdrop: false,
+        timer: 2500,
+        timerProgressBar: true,
+        title: `Welcome ${username}`,
+        text: `You have created your account and logged in automatically!`,
+        icon: 'success',
+        confirmButtonColor: '#17a2b8'
+      });
+    }
+  })
 
   const validator = useRef(new SimpleReactValidator());
 
@@ -18,6 +48,7 @@ export const SignUpForm = ({setUser}) => {
     if (validator.current.allValid()) {
       validator.current.hideMessages();
       alert('You submitted the form and stuff!');
+      registerUserMutation.mutate({name, email, password});
     } else {
       validator.current.showMessages();
       setRerender(!rerender);

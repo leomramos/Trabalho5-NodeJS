@@ -1,11 +1,15 @@
 import React from 'react';
 import Styled, { keyframes } from 'styled-components';
+import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 import {
   Container,
   Row,
   Col,
-  Button
+  Button,
+  Tooltip,
+  OverlayTrigger
 } from 'react-bootstrap';
 
 import { LoginForm, SignUpForm } from '../forms';
@@ -95,17 +99,31 @@ const StyledHeader = Styled(Container)`
   align-items: center;
 `;
 
-export const Header = ({modal, setUser}) => {
+export const Header = ({modal, user, setUser}) => {
   const handleSignUpModal = () => {
     modal.setLabel('Sign Up');
-    modal.setContent(<SignUpForm setUser={setUser}/>);
+    modal.setContent(<SignUpForm setUser={setUser} closeModal={modal.close}/>);
     modal.open();
   }
 
   const handleLoginModal = () => {
     modal.setLabel('Login');
-    modal.setContent(<LoginForm setUser={setUser}/>);
+    modal.setContent(<LoginForm setUser={setUser} closeModal={modal.close}/>);
     modal.open();
+  }
+
+  const handleLogout = () => {
+    setUser();
+    Axios.post(`${process.env.REACT_APP_SERVER}/api/users/logout`);
+    Swal.fire({
+      backdrop: false,
+      timer: 2500,
+      timerProgressBar: true,
+      title: 'Logged out',
+      text: 'You have successfully been logged out!',
+      icon: 'success',
+      confirmButtonColor: '#17a2b8'
+    });
   }
 
   return (
@@ -121,8 +139,26 @@ export const Header = ({modal, setUser}) => {
               <ul id="navbar-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="#products">Products</a></li>
-                <li><Button variant="outline-primary" onClick={handleSignUpModal}>Sign up</Button></li>
-                <li><Button variant="dark" onClick={handleLoginModal}>Login</Button></li>
+                {!!user ? (
+                  <OverlayTrigger
+                    delay={{ hide: 450, show: 300 }}
+                    overlay={(props) => (
+                      <Tooltip {...props}>
+                        Logged in as {user}
+                      </Tooltip>
+                    )}
+                    placement="bottom"
+                  >
+                  <li>
+                      <Button variant="outline-primary" onClick={handleLogout}>Logout</Button>
+                  </li>
+                </OverlayTrigger>
+                ) : (
+                  <>
+                    <li><Button variant="outline-primary" onClick={handleSignUpModal}>Sign up</Button></li>
+                    <li><Button variant="dark" onClick={handleLoginModal}>Login</Button></li>
+                  </>
+                )}
               </ul>
             </Nav>
           </Row>
