@@ -13,7 +13,20 @@ import {
   useQueryClient
 } from 'react-query';
 
-const registerUser = async user => await Axios.post(`${process.env.REACT_APP_SERVER}/api/users/register`, { user });
+let username;
+
+const registerUser = async user => await Axios.post(`${process.env.REACT_APP_SERVER}/api/users/register`, { user }).then(res => {
+  username = res.data.name.split(' ')[0];
+}).catch(err => {
+  Swal.fire({
+    backdrop: false,
+    timer: 2500,
+    timerProgressBar: true,
+    title: err.response.data.email || err.response.data.password,
+    icon: 'error',
+    confirmButtonColor: '#17a2b8'
+  });
+});
 
 export const SignUpForm = ({setUser, closeModal}) => {
   const [rerender, setRerender] = useState(false);
@@ -25,20 +38,21 @@ export const SignUpForm = ({setUser, closeModal}) => {
   const queryClient = useQueryClient();
 
   const registerUserMutation = useMutation(registerUser, {
-    onSuccess: (_, user) => {
-      queryClient.invalidateQueries('user');
-      const username = user.name.split(' ')[0];
-      setUser(username);
-      closeModal();
-      Swal.fire({
-        backdrop: false,
-        timer: 2500,
-        timerProgressBar: true,
-        title: `Welcome ${username}`,
-        text: `You have created your account and logged in automatically!`,
-        icon: 'success',
-        confirmButtonColor: '#17a2b8'
-      });
+    onSuccess: _ => {
+      if(username) {
+        queryClient.invalidateQueries('user');
+        setUser(username);
+        closeModal();
+        Swal.fire({
+          backdrop: false,
+          timer: 2500,
+          timerProgressBar: true,
+          title: `Welcome ${username}`,
+          text: `You have created your account and logged in automatically!`,
+          icon: 'success',
+          confirmButtonColor: '#17a2b8'
+        });
+      }
     }
   })
 
@@ -70,15 +84,13 @@ export const SignUpForm = ({setUser, closeModal}) => {
         <Form.Control type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="name@example.com" spellCheck="false" autoCorrect="off" autoCapitalize="off"/>
         <Form.Label htmlFor="email">Email address</Form.Label>
         {validator.current.message('email', email, 'required|email')}
-        {validator.current.messageWhenPresent(email)}
       </Form.Floating>
 
       <Form.Floating className="mb-4">
         <Form.Control type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" spellCheck="false" autoCorrect="off" autoCapitalize="off" name="current-password" autoComplete="current-password"/>
         <Form.Label htmlFor="password">Password</Form.Label>
-        {validator.current.message('password', password, 'required|min:4|max:16')}
-        {validator.current.messageWhenPresent(password)}
-      </Form.Floating>
+        {validator.current.message('password', password, 'required|min:4|max:16')}      
+        </Form.Floating>
       
       <Button variant="dark" className="w-100 mb-3 mt-1" onClick={submitForm}>Register</Button>
     </Form>

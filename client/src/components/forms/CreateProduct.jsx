@@ -13,10 +13,7 @@ import {
   useQueryClient
 } from 'react-query';
 
-const createProduct = async ( data ) => {
-  console.log(data);
-  await Axios.post(`${process.env.REACT_APP_SERVER}/api/products/create`, data, { headers: { 'Content-Type': 'multipart/form-data'}}).then(res => console.log(res));
-}
+const createProduct = async ( data ) => await Axios.post(`${process.env.REACT_APP_SERVER}/api/products/create`, data, { headers: { 'Content-Type': 'multipart/form-data'}}).then(res => console.log(res));
 
 export const CreateProduct = () => {
   const [rerender, setRerender] = useState(false);
@@ -49,11 +46,15 @@ export const CreateProduct = () => {
 
   const submitForm = e => {
     if (validator.current.allValid()) {
-      console.log(form)
+      // console.log(form)
       const formData = new FormData();
       formData.append("title", title);
-      // formData.append("image", image);
-      Axios.post("https://httpbin.org/anything", image).then(res => console.log(res))
+      formData.append("price", price);
+      formData.append("description", description);
+      formData.append("image", image);
+      // Axios.postForm("https://httpbin.org/anything", formData, {
+      //   headers: { "Content-Type": "multipart/form-data" }
+      // }).then(res => console.log(res))
       validator.current.hideMessages();
       createProductMutation.mutate(formData);
       alert('You submitted the form and stuff!');

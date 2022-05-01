@@ -17,9 +17,17 @@ let username;
 
 const loginUser = async user => {
   await Axios.post(`${process.env.REACT_APP_SERVER}/api/users/login`, { user }).then(res => {
-    username = res.data.name;
-    console.log('a')
-  }).catch(err => console.log(err.response.data))
+    username = res.data.name.split(' ')[0];
+  }).catch(err => {
+    Swal.fire({
+      backdrop: false,
+      timer: 2500,
+      timerProgressBar: true,
+      title: err.response.data.email || err.response.data.password,
+      icon: 'error',
+      confirmButtonColor: '#17a2b8'
+    });
+  })
 };
 
 export const LoginForm = ({setUser, closeModal}) => {
@@ -54,7 +62,6 @@ export const LoginForm = ({setUser, closeModal}) => {
   const submitForm = () => {
     if (validator.current.allValid()) {
       validator.current.hideMessages();
-      alert('You submitted the form and stuff!');
       loginUserMutation.mutate({email, password});
     } else {
       validator.current.showMessages();
@@ -70,14 +77,12 @@ export const LoginForm = ({setUser, closeModal}) => {
         <Form.Control type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="name@example.com" spellCheck="false" autoCorrect="off" autoCapitalize="off"/>
         <Form.Label htmlFor="email">Email address</Form.Label>
         {validator.current.message('email', email, 'required|email')}
-        {validator.current.messageWhenPresent(email)}
       </Form.Floating>
 
       <Form.Floating className="mb-4">
         <Form.Control type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" spellCheck="false" autoCorrect="off" autoCapitalize="off" name="current-password" autoComplete="current-password"/>
         <Form.Label htmlFor="password">Password</Form.Label>
         {validator.current.message('password', password, 'required')}
-        {validator.current.messageWhenPresent(password)}
 
       </Form.Floating>
       
