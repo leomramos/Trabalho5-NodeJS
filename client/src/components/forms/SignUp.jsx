@@ -72,7 +72,6 @@ export const SignUpForm = ({setUser, closeModal}) => {
   return (
     <Form className="d-flex flex-column">
       <h5 className="fw-normal mb-3 pb-3">Create a new account</h5>
-      {validator.current.messageWhenPresent(name)}
 
       <Form.Floating className="mb-4">
         <Form.Control type="text" id="name" onBlur={() => validator.current.showMessageFor('name')} value={name} onChange={e => setName(e.target.value)} placeholder="name@example.com" spellCheck="false" autoCorrect="off" autoCapitalize="off"/>
