@@ -1,6 +1,6 @@
-# Por favor, configurar os dados de acesso ao banco [aqui](./server/.env)
+# Before starting, please make sure that you have MySQL running on localhost:3306
 
-### Para iniciar, execute os comandos abaixo na pasta raíz [trabalho5-nodejs](./)
+### To start, run the commands below on the root folder [trabalho5-nodejs](./)
 
 <br>
 
